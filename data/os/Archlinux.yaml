@@ -1,0 +1,2 @@
+---
+borgmatic::server::package_name: 'borg'
