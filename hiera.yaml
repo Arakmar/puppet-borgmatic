@@ -6,9 +6,7 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
-  - name: "common"
-    paths:
-      - 'databases/postgresql.yaml'
-      - 'databases/mysql.yaml'
-      - 'client.yaml'
-      - 'common.yaml'
+  - name: 'OS family'
+    path: 'os/%{facts.os.family}.yaml'
+  - name: 'common'
+    path: 'common.yaml'

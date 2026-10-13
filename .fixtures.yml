@@ -3,4 +3,12 @@
 ---
 fixtures:
   forge_modules:
-#     stdlib: "puppetlabs/stdlib"
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "10.1.0"
+    systemd:
+      repo: "puppet/systemd"
+      ref: "10.2.0"
+    inifile:
+      repo: "puppetlabs/inifile"
+      ref: "6.5.0"
