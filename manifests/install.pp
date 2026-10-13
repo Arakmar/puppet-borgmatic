@@ -1,10 +1,12 @@
-# @summary
-# Installs borg and borgmatic
+# @summary Installs borgmatic
 #
-# @example
-#   include borgmatic::install
+# @api private
 class borgmatic::install {
   assert_private()
 
-  ensure_packages(['borgmatic'])
+  if $borgmatic::manage_package {
+    package { $borgmatic::package_name:
+      ensure => $borgmatic::package_ensure,
+    }
+  }
 }
