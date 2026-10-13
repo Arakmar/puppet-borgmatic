@@ -1,1 +1,2 @@
 ---
+borgmatic::server::package_name: 'borgbackup'
