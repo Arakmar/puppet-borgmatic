@@ -370,9 +370,10 @@ validate the rendered files with borgmatic 1.8.13, 1.9.14 and the latest
 release (`.github/workflows/ci.yml`, modelled on the
 [Vox Pupuli](https://github.com/voxpupuli/gha-puppet) workflows).
 
-Pushing a `v<version>` tag publishes the module to the Puppet Forge and
-creates a GitHub release through the Vox Pupuli reusable release workflow
-(`.github/workflows/release.yml`). The repository needs a `release`
+Pushing a `v<version>` tag runs the same CI on the tagged commit, checks that
+the tag matches the version of `metadata.json`, then publishes the module to
+the Puppet Forge and creates a GitHub release through the Vox Pupuli reusable
+release workflow (`.github/workflows/release.yml`). The repository needs a `release`
 environment and the `PUPPET_FORGE_USERNAME` and `PUPPET_FORGE_API_KEY`
 secrets; bump `metadata.json` to the tagged version first.
 

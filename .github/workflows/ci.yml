@@ -3,6 +3,8 @@
 # (https://github.com/voxpupuli/gha-puppet, basic.yml). It is inlined rather
 # than reused because gha-puppet installs the bundle without the development
 # group, which is where the PDK Gemfile keeps every test dependency.
+#
+# release.yml calls it before publishing a tag.
 
 name: CI
 
@@ -12,6 +14,7 @@ on:
   push:
     branches:
       - master
+  workflow_call: {}
   workflow_dispatch: {}
 
 concurrency:
