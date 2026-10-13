@@ -9,13 +9,13 @@
 type Borgmatic::Check = Variant[
   Enum['repository', 'archives', 'data', 'extract', 'spot', 'disabled'],
   Struct[{
-      'name'                                 => Enum['repository', 'archives', 'data', 'extract', 'spot', 'disabled'],
-      Optional['frequency']                  => String[1],
-      Optional['only_run_on']                => Array[String[1], 1],
-      Optional['max_duration']               => Integer[1],
-      Optional['count_tolerance_percentage'] => Numeric,
-      Optional['data_sample_percentage']     => Numeric,
-      Optional['data_tolerance_percentage']  => Numeric,
-      Optional['xxh64sum_command']           => String[1],
+    'name'                                 => Enum['repository', 'archives', 'data', 'extract', 'spot', 'disabled'],
+    Optional['frequency']                  => String[1],
+    Optional['only_run_on']                => Array[String[1], 1],
+    Optional['max_duration']               => Integer[1],
+    Optional['count_tolerance_percentage'] => Numeric,
+    Optional['data_sample_percentage']     => Numeric,
+    Optional['data_tolerance_percentage']  => Numeric,
+    Optional['xxh64sum_command']           => String[1],
   }],
 ]

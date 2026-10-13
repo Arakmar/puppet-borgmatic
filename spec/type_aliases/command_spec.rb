@@ -5,10 +5,10 @@ require 'spec_helper'
 describe 'Borgmatic::Command' do
   it do
     is_expected.to allow_values(
-      { 'before' => 'action', 'when' => ['create', 'prune'], 'run' => ['echo before'] },
+      { 'before' => 'action', 'when' => %w[create prune], 'run' => ['echo before'] },
       { 'before' => 'everything', 'run' => ['echo start'] },
       { 'after' => 'error', 'run' => ['echo "{error}"'] },
-      { 'after' => 'repository', 'when' => ['check'], 'states' => ['finish', 'fail'], 'run' => ['echo done'] },
+      { 'after' => 'repository', 'when' => ['check'], 'states' => %w[finish fail], 'run' => ['echo done'] },
     )
   end
 

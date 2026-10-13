@@ -9,7 +9,7 @@ function borgmatic::normalize(Any $data) >> Any {
   $data ? {
     Sensitive => borgmatic::normalize($data.unwrap),
     Hash      => Hash($data.filter |$key, $value| { $value =~ NotUndef }.map |$key, $value| {
-        [$key, borgmatic::normalize($value)]
+      [$key, borgmatic::normalize($value)]
     }),
     Array     => $data.filter |$value| { $value =~ NotUndef }.map |$value| { borgmatic::normalize($value) },
     default   => $data,

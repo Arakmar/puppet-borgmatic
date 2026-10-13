@@ -242,6 +242,8 @@ Data type: `String[1]`
 
 Name of the Borg package, `borgbackup` (`borg` on Arch Linux) from module data.
 
+Default value: `'borgbackup'`
+
 ##### <a name="-borgmatic--server--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
@@ -2024,7 +2026,7 @@ A string is the name of the check, the other keys are those of the
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 'repository'
@@ -2035,14 +2037,14 @@ Alias of
 
 ```puppet
 Variant[Enum['repository', 'archives', 'data', 'extract', 'spot', 'disabled'], Struct[{
-      'name'                                 => Enum['repository', 'archives', 'data', 'extract', 'spot', 'disabled'],
-      Optional['frequency']                  => String[1],
-      Optional['only_run_on']                => Array[String[1], 1],
-      Optional['max_duration']               => Integer[1],
-      Optional['count_tolerance_percentage'] => Numeric,
-      Optional['data_sample_percentage']     => Numeric,
-      Optional['data_tolerance_percentage']  => Numeric,
-      Optional['xxh64sum_command']           => String[1],
+    'name'                                 => Enum['repository', 'archives', 'data', 'extract', 'spot', 'disabled'],
+    Optional['frequency']                  => String[1],
+    Optional['only_run_on']                => Array[String[1], 1],
+    Optional['max_duration']               => Integer[1],
+    Optional['count_tolerance_percentage'] => Numeric,
+    Optional['data_sample_percentage']     => Numeric,
+    Optional['data_tolerance_percentage']  => Numeric,
+    Optional['xxh64sum_command']           => String[1],
   }]]
 ```
 
@@ -2068,14 +2070,14 @@ Alias of
 
 ```puppet
 Variant[Struct[{
-      'before'         => Enum['action', 'repository', 'configuration', 'everything'],
-      Optional['when'] => Array[Borgmatic::Action, 1],
-      'run'            => Array[String[1], 1],
+    'before'         => Enum['action', 'repository', 'configuration', 'everything'],
+    Optional['when'] => Array[Borgmatic::Action, 1],
+    'run'            => Array[String[1], 1],
   }], Struct[{
-      'after'            => Enum['action', 'repository', 'configuration', 'everything', 'error'],
-      Optional['when']   => Array[Borgmatic::Action, 1],
-      Optional['states'] => Array[Enum['finish', 'fail'], 1],
-      'run'              => Array[String[1], 1],
+    'after'            => Enum['action', 'repository', 'configuration', 'everything', 'error'],
+    Optional['when']   => Array[Borgmatic::Action, 1],
+    Optional['states'] => Array[Enum['finish', 'fail'], 1],
+    'run'              => Array[String[1], 1],
   }]]
 ```
 
@@ -2085,7 +2087,7 @@ A Borg compression specification
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 'zstd,3'
@@ -2108,7 +2110,7 @@ A string is the path of the repository, the other keys are those of the
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 'ssh://borg@backup.example.org/srv/borg/client1'
@@ -2119,12 +2121,12 @@ Alias of
 
 ```puppet
 Variant[String[1], Struct[{
-      'path'                              => String[1],
-      Optional['label']                   => String[1],
-      Optional['encryption']              => String[1],
-      Optional['append_only']             => Boolean,
-      Optional['storage_quota']           => Borgmatic::StorageQuota,
-      Optional['make_parent_directories'] => Boolean,
+    'path'                              => String[1],
+    Optional['label']                   => String[1],
+    Optional['encryption']              => String[1],
+    Optional['append_only']             => Boolean,
+    Optional['storage_quota']           => Borgmatic::StorageQuota,
+    Optional['make_parent_directories'] => Boolean,
   }]]
 ```
 
@@ -2148,7 +2150,7 @@ A Borg storage quota, a size with an optional unit suffix
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 '500G'
@@ -2163,7 +2165,7 @@ literal such as `0027` as an octal number.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 '0027'
@@ -2176,4 +2178,3 @@ Alias of `Pattern[/\A0?[0-7]{3}\z/]`
 A borgmatic verbosity level, from -2 (disabled) to 2 (debug)
 
 Alias of `Integer[-2, 2]`
-

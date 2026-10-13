@@ -3,14 +3,18 @@
 require 'spec_helper'
 
 describe 'borgmatic::repository' do
-  key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExample root@client1'
+  def key
+    'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExample root@client1'
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
       let(:title) { 'client1' }
 
-      package = (os_facts[:os]['family'] == 'Archlinux') ? 'borg' : 'borgbackup'
+      def package
+        (facts[:os]['family'] == 'Archlinux') ? 'borg' : 'borgbackup'
+      end
 
       context 'with a passphrase' do
         let(:params) { { owner: 'borg-client1', passphrase: 'secret' } }

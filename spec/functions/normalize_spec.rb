@@ -12,7 +12,7 @@ describe 'borgmatic::normalize' do
   end
 
   it 'preserves insertion order' do
-    expect(call_function('borgmatic::normalize', { 'z' => 1, 'a' => 2, 'm' => nil, 'b' => 3 }).keys).to eq(['z', 'a', 'b'])
+    expect(call_function('borgmatic::normalize', { 'z' => 1, 'a' => 2, 'm' => nil, 'b' => 3 }).keys).to eq(%w[z a b])
   end
 
   it { is_expected.to run.with_params(sensitive('x')).and_return('x') }

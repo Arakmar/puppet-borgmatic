@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+**Features**
+
+* OpenVox 9 support. Perforce Puppet 8 is no longer tested.
+* RHEL 10 is declared in metadata.json, now that it has fact sets to unit
+  test it.
+
+**Other**
+
+* The tooling moves from the PDK to the one of Vox Pupuli (voxpupuli-test,
+  voxpupuli-release), which runs on OpenVox: the PDK cannot install
+  OpenVox 9. GitHub Actions run the Vox Pupuli reusable workflow with the
+  unit tests on OpenVox 8 (Ruby 3.2) and 9 (Ruby 4.0), and keep validating the rendered files with
+  borgmatic.
+
 ## Release 1.0.0
 
 First versioned release, published as `arakmar-borgmatic`. The module
