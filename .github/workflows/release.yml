@@ -1,0 +1,31 @@
+---
+# Publishes the module to the Puppet Forge and creates a GitHub release when a
+# v<semver> tag is pushed, through the Vox Pupuli reusable workflow
+# (https://github.com/voxpupuli/gha-puppet). It runs `rake module:push` from
+# puppet-blacksmith, which the PDK Gemfile provides.
+#
+# Requirements on the repository:
+#   - a `release` environment,
+#   - the PUPPET_FORGE_USERNAME and PUPPET_FORGE_API_KEY secrets,
+#   - metadata.json bumped to the tagged version before tagging.
+
+name: Release
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release
+    uses: voxpupuli/gha-puppet/.github/workflows/release.yml@v4
+    with:
+      allowed_owner: 'Arakmar'
+    secrets:
+      username: ${{ secrets.PUPPET_FORGE_USERNAME }}
+      api_key: ${{ secrets.PUPPET_FORGE_API_KEY }}
