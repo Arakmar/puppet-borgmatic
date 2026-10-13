@@ -575,8 +575,10 @@ define borgmatic::config (
     $content = undef
   }
 
+  # The log file of the configuration is opened by any borgmatic command,
+  # it may not be writable yet
   $validate_cmd = $validate ? {
-    true    => "${borgmatic::binary_path} --config % config validate",
+    true    => "${borgmatic::binary_path} --config % --log-file /dev/null config validate",
     default => undef,
   }
 
