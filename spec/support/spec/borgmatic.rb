@@ -8,10 +8,13 @@ require 'yaml'
 # checking them with borgmatic itself when it is installed.
 module BorgmaticSpecHelpers
   # The borgmatic executable checking the rendered files: $BORGMATIC or the
-  # one found in the PATH. With BORGMATIC_VALIDATE set, a missing borgmatic
-  # fails these examples instead of skipping them.
+  # one found in the PATH, nil when it is not an executable.
   def self.borgmatic
-    @borgmatic ||= ENV['BORGMATIC'] || ENV['PATH'].split(File::PATH_SEPARATOR).map { |dir| File.join(dir, 'borgmatic') }.find { |path| File.executable?(path) }
+    @borgmatic ||= if ENV['BORGMATIC']
+                     ENV['BORGMATIC'] if File.executable?(ENV['BORGMATIC'])
+                   else
+                     ENV['PATH'].split(File::PATH_SEPARATOR).map { |dir| File.join(dir, 'borgmatic') }.find { |path| File.executable?(path) }
+                   end
   end
 
   def self.borgmatic_version
@@ -31,15 +34,14 @@ module BorgmaticSpecHelpers
     YAML.safe_load(rendered_content(path))
   end
 
-  # Checks a configuration like borgmatic::config does, skipping the example
-  # when borgmatic is missing or older than min_version.
-  def expect_valid_for_borgmatic(content, min_version: '1.8.0')
-    if BorgmaticSpecHelpers.borgmatic.nil?
-      raise 'borgmatic not found' if ENV['BORGMATIC_VALIDATE']
+  # Whether the installed borgmatic is at least `release`
+  def self.at_least?(release)
+    !borgmatic_version.nil? && borgmatic_version >= Gem::Version.new(release)
+  end
 
-      skip 'borgmatic is not installed'
-    end
-    skip "borgmatic #{BorgmaticSpecHelpers.borgmatic_version} is older than #{min_version}" if BorgmaticSpecHelpers.borgmatic_version < Gem::Version.new(min_version)
+  # Checks a configuration like borgmatic::config does.
+  def expect_valid_for_borgmatic(content)
+    raise 'borgmatic not found' if BorgmaticSpecHelpers.borgmatic.nil?
 
     Tempfile.create(['borgmatic', '.yaml']) do |file|
       file.write(content)
@@ -52,4 +54,11 @@ end
 
 RSpec.configure do |c|
   c.include BorgmaticSpecHelpers
+  # The checks, tagged :borgmatic, are left out rather than skipped one by one
+  # without borgmatic: the CI jobs installing borgmatic run them. With
+  # BORGMATIC_VALIDATE a missing borgmatic fails them instead.
+  c.filter_run_excluding(:borgmatic) unless ENV['BORGMATIC_VALIDATE'] || BorgmaticSpecHelpers.borgmatic
+  # Those needing a newer borgmatic than the installed one are left out too.
+  # This is another key than the tag, which --tag would override.
+  c.filter_run_excluding borgmatic_release: ->(release) { BorgmaticSpecHelpers.borgmatic && !BorgmaticSpecHelpers.at_least?(release) }
 end

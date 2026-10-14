@@ -67,7 +67,7 @@ jobs:
       - name: Validate the rendered configurations with borgmatic
         run: |
           bundle exec rake fixtures:prep
-          bundle exec rspec spec/defines/config_spec.rb --example 'validated by borgmatic'
+          bundle exec rspec spec/defines/config_spec.rb --tag borgmatic --format progress
 
   tests:
     name: Test suite

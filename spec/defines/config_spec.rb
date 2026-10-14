@@ -334,20 +334,21 @@ describe 'borgmatic::config' do
     end
   end
 
-  context 'validated by borgmatic' do
+  # Tagged :borgmatic, with the borgmatic release the examples need
+  context 'validated by borgmatic', :borgmatic, borgmatic_release: '1.8.0' do
     let(:facts) { on_supported_os.values.first }
 
-    context 'with every option' do
+    context 'with every option', borgmatic_release: '2.1.0' do
       let(:params) { full_params }
 
-      it { expect_valid_for_borgmatic(rendered_content(path), min_version: '2.1.0') }
+      it { expect_valid_for_borgmatic(rendered_content(path)) }
     end
 
-    context 'with the options of the previous versions of the module' do
+    # only_run_on appeared in borgmatic 1.8.13
+    context 'with the options of the previous versions of the module', borgmatic_release: '1.8.13' do
       let(:params) { legacy_params }
 
-      # only_run_on appeared in borgmatic 1.8.13
-      it { expect_valid_for_borgmatic(rendered_content(path), min_version: '1.8.13') }
+      it { expect_valid_for_borgmatic(rendered_content(path)) }
     end
 
     context 'with a repository' do
