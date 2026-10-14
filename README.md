@@ -371,8 +371,10 @@ bundle exec rake module:build
 ```
 
 When borgmatic is installed, the unit tests also check the rendered files with
-`borgmatic config validate`; point `BORGMATIC` at another executable to test
-another release.
+`borgmatic config validate`, leaving out the examples tagged with a newer
+release than the installed one (all of them without borgmatic, unless
+`BORGMATIC_VALIDATE` makes that an error); point `BORGMATIC` at another
+executable to test another release.
 
 GitHub Actions run the static validations, RuboCop, a REFERENCE.md freshness
 check and the unit tests on OpenVox 8 (Ruby 3.2) and 9 (Ruby 4.0) through the
