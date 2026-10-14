@@ -6,14 +6,14 @@
 #   { 'after' => 'error', 'run' => ['echo "{configuration_filename}: {error}" | mail root'] }
 type Borgmatic::Command = Variant[
   Struct[{
-      'before'         => Enum['action', 'repository', 'configuration', 'everything'],
-      Optional['when'] => Array[Borgmatic::Action, 1],
-      'run'            => Array[String[1], 1],
+    'before'         => Enum['action', 'repository', 'configuration', 'everything'],
+    Optional['when'] => Array[Borgmatic::Action, 1],
+    'run'            => Array[String[1], 1],
   }],
   Struct[{
-      'after'            => Enum['action', 'repository', 'configuration', 'everything', 'error'],
-      Optional['when']   => Array[Borgmatic::Action, 1],
-      Optional['states'] => Array[Enum['finish', 'fail'], 1],
-      'run'              => Array[String[1], 1],
+    'after'            => Enum['action', 'repository', 'configuration', 'everything', 'error'],
+    Optional['when']   => Array[Borgmatic::Action, 1],
+    Optional['states'] => Array[Enum['finish', 'fail'], 1],
+    'run'              => Array[String[1], 1],
   }],
 ]

@@ -7,7 +7,9 @@ describe 'borgmatic::server' do
     context "on #{os}" do
       let(:facts) { os_facts }
 
-      package = (os_facts[:os]['family'] == 'Archlinux') ? 'borg' : 'borgbackup'
+      def package
+        (facts[:os]['family'] == 'Archlinux') ? 'borg' : 'borgbackup'
+      end
 
       context 'with default parameters' do
         it { is_expected.to compile.with_all_deps }

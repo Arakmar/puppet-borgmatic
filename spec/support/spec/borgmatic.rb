@@ -44,7 +44,7 @@ module BorgmaticSpecHelpers
     Tempfile.create(['borgmatic', '.yaml']) do |file|
       file.write(content)
       file.flush
-      output, status = Open3.capture2e(BorgmaticSpecHelpers.borgmatic, '--config', file.path, '--log-file', '/dev/null', 'config', 'validate')
+      output, status = Open3.capture2e(BorgmaticSpecHelpers.borgmatic, '--config', file.path, '--log-file', File::NULL, 'config', 'validate')
       expect(status).to be_success, output
     end
   end

@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe 'borgmatic::authorized_key' do
-  key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA+Ex/ample= root@client1'
+  def key
+    'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA+Ex/ample= root@client1'
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

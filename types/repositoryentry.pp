@@ -9,11 +9,11 @@
 type Borgmatic::RepositoryEntry = Variant[
   String[1],
   Struct[{
-      'path'                              => String[1],
-      Optional['label']                   => String[1],
-      Optional['encryption']              => String[1],
-      Optional['append_only']             => Boolean,
-      Optional['storage_quota']           => Borgmatic::StorageQuota,
-      Optional['make_parent_directories'] => Boolean,
+    'path'                              => String[1],
+    Optional['label']                   => String[1],
+    Optional['encryption']              => String[1],
+    Optional['append_only']             => Boolean,
+    Optional['storage_quota']           => Borgmatic::StorageQuota,
+    Optional['make_parent_directories'] => Boolean,
   }],
 ]

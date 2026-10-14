@@ -5,8 +5,13 @@ require 'spec_helper'
 describe 'borgmatic::timer' do
   let(:title) { 'system' }
 
-  service = '/etc/systemd/system/borgmatic-system.service'
-  timer = '/etc/systemd/system/borgmatic-system.timer'
+  def service
+    '/etc/systemd/system/borgmatic-system.service'
+  end
+
+  def timer
+    '/etc/systemd/system/borgmatic-system.timer'
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
@@ -56,7 +61,7 @@ describe 'borgmatic::timer' do
             on_calendar: ['*-*-* 02:15:00', '*-*-* 14:15:00'],
             persistent: false,
             randomized_delay_sec: '30m',
-            actions: ['create', 'prune'],
+            actions: %w[create prune],
             verbosity: -1,
             syslog_verbosity: 1,
             log_file: '/var/log/borgmatic/cephfs.log',
